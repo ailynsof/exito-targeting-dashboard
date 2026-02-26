@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Almacenes Éxito | Marketing Strategy & Insights Hub</title>
+    <title>Almacenes Éxito | Digital Consumer Insights 2026</title>
+    <!-- Fonts & Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
@@ -18,7 +19,7 @@
             --text-muted: #94a3b8;
             --border: #27272a;
             --success: #10b981;
-            --warning: #f59e0b;
+            --error: #ef4444;
         }
 
         * {
@@ -34,53 +35,20 @@
             overflow-x: hidden;
         }
 
-        /* Sidebar Navigation */
-        .sidebar {
-            position: fixed;
-            left: 0;
-            top: 0;
-            bottom: 0;
-            width: 80px;
-            background: var(--bg-card);
-            border-right: 1px solid var(--border);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 20px 0;
-            z-index: 100;
-        }
-
-        .nav-item {
-            color: var(--text-muted);
-            margin: 15px 0;
-            cursor: pointer;
-            transition: 0.3s;
-            padding: 12px;
-            border-radius: 12px;
-        }
-
-        .nav-item:hover,
-        .nav-item.active {
-            color: var(--accent);
-            background: var(--accent-soft);
-        }
-
-        /* Main Context */
         .main-content {
-            margin-left: 80px;
             padding: 40px;
-            max-width: 1600px;
+            max-width: 1400px;
+            margin: 0 auto;
         }
 
         header {
             margin-bottom: 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 20px;
         }
 
         .header-title h1 {
-            font-size: 2.5rem;
+            font-size: 2.2rem;
             font-weight: 700;
             letter-spacing: -1px;
         }
@@ -89,27 +57,44 @@
             color: var(--accent);
         }
 
-        /* Tabs / Navigation Submenu */
-        .tabs {
-            display: flex;
+        /* KPI Cards */
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
             gap: 20px;
-            margin-bottom: 30px;
-            border-bottom: 1px solid var(--border);
-            padding-bottom: 10px;
+            margin-bottom: 40px;
         }
 
-        .tab {
-            padding: 10px 20px;
-            cursor: pointer;
-            color: var(--text-muted);
-            font-weight: 600;
-            border-radius: 8px;
-            transition: 0.3s;
+        .kpi-card {
+            background: var(--bg-card);
+            padding: 24px;
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            position: relative;
+            overflow: hidden;
         }
 
-        .tab.active {
+        .kpi-card::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 4px;
             background: var(--accent);
-            color: var(--bg-deep);
+        }
+
+        .kpi-label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .kpi-value {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-top: 5px;
         }
 
         /* Dashboard Grid */
@@ -124,12 +109,6 @@
             padding: 28px;
             border-radius: 24px;
             border: 1px solid var(--border);
-            transition: 0.3s;
-            position: relative;
-        }
-
-        .chart-container:hover {
-            border-color: #3f3f46;
         }
 
         .col-4 {
@@ -149,9 +128,6 @@
         }
 
         .chart-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
             margin-bottom: 20px;
         }
 
@@ -165,413 +141,324 @@
             color: var(--text-muted);
         }
 
-        /* Knowledge Insets (The "PDF" parts) */
-        .insight-card {
-            background: linear-gradient(135deg, #1e1e24 0%, #151518 100%);
-            padding: 24px;
-            border-radius: 20px;
-            border-left: 4px solid var(--accent);
-            margin-top: 20px;
-            font-size: 0.95rem;
+        /* Word Cloud / List Styling */
+        .word-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
         }
 
-        .insight-card h4 {
+        .word-tag {
+            background: var(--accent-soft);
             color: var(--accent);
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
+            padding: 8px 16px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            border: 1px solid rgba(255, 224, 0, 0.2);
         }
 
-        .insight-card p {
-            line-height: 1.5;
-            color: #ddd;
+        .word-tag.large {
+            font-size: 1.2rem;
+            background: var(--accent);
+            color: #000;
         }
 
-        /* Buyer Persona Styling */
-        .persona-hub {
-            display: flex;
-            gap: 30px;
-            background: var(--bg-card);
-            padding: 30px;
-            border-radius: 24px;
+        /* Persona Section (Now at bottom) */
+        .persona-footer {
+            margin-top: 50px;
+            background: linear-gradient(135deg, #1e1e24 0%, #151518 100%);
+            padding: 40px;
+            border-radius: 30px;
             border: 1px solid var(--border);
         }
 
+        .persona-content {
+            display: flex;
+            gap: 40px;
+            align-items: center;
+        }
+
         .persona-avatar {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
+            width: 100px;
+            height: 100px;
             background: var(--accent);
+            border-radius: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
             flex-shrink: 0;
         }
 
-        .persona-info h2 {
-            color: var(--accent);
-            font-size: 1.8rem;
-        }
-
-        .persona-tag {
-            background: var(--border);
-            padding: 4px 10px;
-            border-radius: 6px;
-            font-size: 0.75rem;
-            margin-right: 5px;
-        }
-
-        /* Interactive Elements */
-        .btn-action {
-            background: var(--accent);
-            color: var(--bg-deep);
-            border: none;
-            padding: 10px 20px;
-            border-radius: 10px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: 0.3s;
+        /* Utility */
+        .insight-badge {
+            background: rgba(16, 185, 129, 0.1);
+            color: #10b981;
+            padding: 10px 15px;
+            border-radius: 12px;
+            font-size: 0.85rem;
             margin-top: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
-        .btn-action:hover {
-            opacity: 0.9;
-            transform: scale(1.02);
-        }
-
-        .metric-badge {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: var(--accent-soft);
-            color: var(--accent);
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            font-weight: 700;
-        }
-
-        /* Animations */
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
+        @media (max-width: 1000px) {
+            .kpi-grid {
+                grid-template-columns: repeat(2, 1fr);
             }
 
-            to {
-                opacity: 1;
-                transform: translateY(0);
+            .col-4,
+            .col-6,
+            .col-8 {
+                grid-column: span 12;
             }
-        }
-
-        .animate {
-            animation: slideUp 0.6s ease forwards;
-        }
-
-        /* Hide sections initially */
-        .section-view {
-            display: none;
-        }
-
-        .section-view.active {
-            display: block;
         }
     </style>
 </head>
 
 <body>
 
-    <aside class="sidebar">
-        <div class="nav-item active"><i data-lucide="layout-dashboard"></i></div>
-        <div class="nav-item"><i data-lucide="bar-chart-3"></i></div>
-        <div class="nav-item"><i data-lucide="search"></i></div>
-        <div class="nav-item"><i data-lucide="heart"></i></div>
-        <div style="margin-top: auto;" class="nav-item"><i data-lucide="file-text"></i></div>
-    </aside>
-
     <main class="main-content">
         <header>
             <div class="header-title">
-                <h1>Targeting & <span>Macro</span> Hub</h1>
-                <p style="color: var(--text-muted)">Almacenes Éxito S.A.S. | Inteligencia de Mercados</p>
-            </div>
-            <div style="text-align: right;">
-                <p style="font-size: 0.8rem; color: var(--text-muted);">Último Reporte: 2026-Q1</p>
-                <div style="color: var(--success); font-weight: bold; font-size: 0.9rem;">● CONECTADO</div>
+                <h1>Customer Targeting <span>Éxito</span> 2026</h1>
+                <p style="color: var(--text-muted)">Estrategia de Fidelización y Comportamiento del Consumidor</p>
             </div>
         </header>
 
-        <div class="tabs">
-            <div class="tab active" onclick="switchSection('targeting')">Targeting & Buyer</div>
-            <div class="tab" onclick="switchSection('macro')">Análisis Macro (PDF Insights)</div>
-            <div class="tab" onclick="switchSection('social')">Social Listening</div>
-        </div>
-
-        <!-- SECTION: TARGETING & BUYER -->
-        <div id="targeting" class="section-view active animate">
-            <div class="dashboard-grid">
-                <div class="chart-container col-12" style="margin-bottom: 24px;">
-                    <div class="persona-hub">
-                        <div class="persona-avatar"><i data-lucide="user" size="60" color="#000"></i></div>
-                        <div class="persona-info">
-                            <div style="display: flex; align-items: center; gap: 15px;">
-                                <h2>Adriana, la "Smart Shopper"</h2>
-                                <span class="persona-tag">#CoreTarget</span>
-                                <span class="persona-tag">#EarlyAdopter</span>
-                            </div>
-                            <p style="color: var(--text-muted); margin: 5px 0 15px;">34 años • Estrato 4 • Bogotá •
-                                Perfil Omnicanal</p>
-                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px;">
-                                <div>
-                                    <h4 style="color: var(--accent); font-size: 0.8rem; text-transform: uppercase;">
-                                        Motivación Dominante</h4>
-                                    <p style="font-size: 0.9rem;"><strong>Optimización de valor:</strong> No busca solo
-                                        "lo más barato", sino el mejor retorno por sus Puntos Colombia.</p>
-                                </div>
-                                <div>
-                                    <h4 style="color: var(--accent); font-size: 0.8rem; text-transform: uppercase;">
-                                        Canal de Conversión</h4>
-                                    <p style="font-size: 0.9rem;"><strong>Mobile-First:</strong> El 42% de sus compras
-                                        inician en la App y terminan en "Click & Collect".</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="chart-container col-8">
-                    <div class="chart-header">
-                        <div class="chart-title">
-                            <h3>Volumetría por Rango Etario</h3>
-                            <p>Universo Estimado: 41.6M Personas</p>
-                        </div>
-                    </div>
-                    <div style="height: 300px;"><canvas id="targetingChart"></canvas></div>
-                    <div class="insight-card">
-                        <h4><i data-lucide="lightbulb"></i> Insight Estratégico</h4>
-                        <p>El segmento <strong>S2 (25-34)</strong> es el motor del crecimiento digital. Sus búsquedas en
-                            "Answer The Public" se centran en <em>alimentos saludables</em> y <em>redención de
-                                puntos</em>.</p>
-                    </div>
-                </div>
-
-                <div class="chart-container col-4">
-                    <div class="chart-header">
-                        <div class="chart-title">
-                            <h3>Motivaciones de Compra</h3>
-                            <p>Basado en Intent-Search</p>
-                        </div>
-                    </div>
-                    <div style="height: 250px;"><canvas id="motivationChart"></canvas></div>
-                    <button class="btn-action" style="width: 100%;">Ver Perfil Detallado</button>
-                </div>
+        <!-- KPI Block: Universo, Core Target, Fidelidad, LTV -->
+        <div class="kpi-grid">
+            <div class="kpi-card">
+                <div class="kpi-label">Universo Potencial</div>
+                <div class="kpi-value">41.6M</div>
+                <p style="font-size: 0.75rem; color: var(--success);">Meta Ads Audience Colombia</p>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-label">Core Target (S2)</div>
+                <div class="kpi-value">13.1M</div>
+                <p style="font-size: 0.75rem; color: var(--accent);">Rango 25-34 años</p>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-label">Fidelidad S5</div>
+                <div class="kpi-value">88.4%</div>
+                <p style="font-size: 0.75rem; color: var(--text-muted);">Retención histórico +55</p>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-label">Diciembre Peak</div>
+                <div class="kpi-value">1.8x</div>
+                <p style="font-size: 0.75rem; color: var(--success);">Índice Estacional Navideño</p>
             </div>
         </div>
 
-        <!-- SECTION: MACRO ANALYSIS -->
-        <div id="macro" class="section-view animate">
-            <div class="dashboard-grid">
-                <div class="chart-container col-8">
-                    <div class="chart-header">
-                        <div class="chart-title">
-                            <h3>Ventas vs PIB: El Fenómeno de Desconexión</h3>
-                            <p>Contraste: Salud del país vs. Rendimiento Éxito</p>
-                        </div>
-                    </div>
-                    <div style="height: 350px;"><canvas id="pibSalesChart"></canvas></div>
-                </div>
+        <div class="dashboard-grid">
 
-                <div class="chart-container col-4">
+            <!-- Demográficos: Edad -->
+            <div class="chart-container col-8">
+                <div class="chart-header">
                     <div class="chart-title">
-                        <h3>Análisis de Resiliencia</h3>
-                    </div>
-                    <div class="insight-card" style="margin-top: 20px;">
-                        <h4><i data-lucide="file-text"></i> Del Informe Ejecutivo</h4>
-                        <p>A pesar de que el PIB se frenó al <strong>0.6% en 2023</strong>, el Éxito aumentó ventas
-                            nominales. Esto confirma que la empresa funciona como un "refugio de consumo" básico.</p>
-                    </div>
-                    <div class="insight-card" style="border-left-color: var(--warning);">
-                        <h4><i data-lucide="trending-up"></i> Trading-Down</h4>
-                        <p>La inflación empujó a los consumidores a marcas propias (**Éxito, Ekono**), las cuales
-                            crecieron un 15% anual.</p>
+                        <h3>Distribución de Público por Edad (S1-S5)</h3>
+                        <p>Segmentación basada en volumen de Meta Ads</p>
                     </div>
                 </div>
+                <div style="height: 300px;"><canvas id="ageChart"></canvas></div>
+            </div>
 
-                <div class="chart-container col-6">
-                    <div class="chart-header">
-                        <div class="chart-title">
-                            <h3>Tasas de Interés vs Ticket Promedio</h3>
-                        </div>
+            <!-- Género -->
+            <div class="chart-container col-4">
+                <div class="chart-header">
+                    <div class="chart-title">
+                        <h3>Distribución de Género</h3>
+                        <p>Toma de decisión de compra</p>
                     </div>
-                    <div style="height: 250px;"><canvas id="ratesChart"></canvas></div>
                 </div>
-
-                <div class="chart-container col-6">
-                    <div class="chart-header">
-                        <div class="chart-title">
-                            <h3>Estacionalidad: El "Latido" del Negocio</h3>
-                        </div>
-                    </div>
-                    <div style="height: 250px;"><canvas id="seasonChart"></canvas></div>
+                <div style="height: 220px;"><canvas id="genderChart"></canvas></div>
+                <div class="insight-badge">
+                    <i data-lucide="info"></i>
+                    62% Femenino: Decisora de canasta familiar.
                 </div>
             </div>
+
+            <!-- Social Listening: History (Positive vs Negative) -->
+            <div class="chart-container col-8">
+                <div class="chart-header">
+                    <div class="chart-title">
+                        <h3>Social Listening: Evolución Anual (2025)</h3>
+                        <p>Contraste de Sentimiento Positivo vs Negativo por mes</p>
+                    </div>
+                </div>
+                <div style="height: 350px;"><canvas id="listeningChart"></canvas></div>
+            </div>
+
+            <!-- Smart Shopper Topics (Word Cloud / List) -->
+            <div class="chart-container col-4">
+                <div class="chart-header">
+                    <div class="chart-title">
+                        <h3>Smart Shopper Topics</h3>
+                        <p>Tópicos dominantes en menciones</p>
+                    </div>
+                </div>
+                <div class="word-list">
+                    <div class="word-tag large">#PuntosColombia</div>
+                    <div class="word-tag">#PreciosInsuperables</div>
+                    <div class="word-tag large">#OfertasCarnes</div>
+                    <div class="word-tag">#AppExito</div>
+                    <div class="word-tag">#MarcasPropias</div>
+                    <div class="word-tag large">#Cupones</div>
+                    <div class="word-tag">#ClickAndCollect</div>
+                    <div class="word-tag">#Frescura</div>
+                    <div class="word-tag">#AhorroSmart</div>
+                </div>
+                <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid var(--border);">
+                    <p style="font-size: 0.85rem; color: var(--text-muted);">
+                        <strong>Concepto Central:</strong> El consumidor busca optimizar su presupuesto vía lealtad sin
+                        sacrificar la frescura tradicional.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Estacionalidad (Incluyendo Agosto y Diciembre) -->
+            <div class="chart-container col-12">
+                <div class="chart-header">
+                    <div class="chart-title">
+                        <h3>Estacionalidad y Picos de Marketing</h3>
+                        <p>Índice de Venta Mensual (Promedio 100)</p>
+                    </div>
+                </div>
+                <div style="height: 300px;"><canvas id="seasonalityChart"></canvas></div>
+            </div>
+
         </div>
 
-        <!-- SECTION: SOCIAL LISTENING -->
-        <div id="social" class="section-view animate">
-            <div class="dashboard-grid">
-                <div class="chart-container col-12">
-                    <div
-                        style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+        <!-- Persona Section (At Bottom) -->
+        <div class="persona-footer animate">
+            <div class="persona-content">
+                <div class="persona-avatar"><i data-lucide="user" size="50" color="#000"></i></div>
+                <div style="flex:1">
+                    <h3 style="color: var(--accent); margin-bottom: 10px;">Perfil: Adriana, la "Smart Shopper"</h3>
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
                         <div>
-                            <h3>Voz del Consumidor (Social Listening)</h3>
-                            <p>Análisis de sentimiento en tiempo real: Meta, X & Instagram</p>
+                            <p style="font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase;">
+                                Demografía</p>
+                            <p>34 años, Estrato 4, Madre de familia.</p>
                         </div>
-                        <div style="display: flex; gap: 10px;">
-                            <span class="persona-tag" style="background: var(--success); color: #000;">Positivo:
-                                68%</span>
-                            <span class="persona-tag" style="background: var(--border);">Neutro: 22%</span>
+                        <div>
+                            <p style="font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase;">
+                                Motivación</p>
+                            <p>Ahorro inteligente y acumulación de Puntos.</p>
                         </div>
-                    </div>
-                    <div style="height: 350px;"><canvas id="sentimentChart"></canvas></div>
-
-                    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; margin-top: 30px;">
-                        <div class="insight-card">
-                            <h4><i data-lucide="thumbs-up"></i> Fortalezas</h4>
-                            <p>"Frescura en carnes" y "Puntos Colombia" son los tópicos con mayor sentimiento positivo.
-                            </p>
-                        </div>
-                        <div class="insight-card" style="border-left-color: var(--error);">
-                            <h4><i data-lucide="alert-triangle"></i> Pain Points</h4>
-                            <p>"Largas filas en cajas físicas" y "Fricción en la App" representan el 15% de las
-                                menciones negativas.</p>
-                        </div>
-                        <div class="insight-card" style="border-left-color: #818cf8;">
-                            <h4><i data-lucide="message-square"></i> Oportunidad</h4>
-                            <p>Creciente interés en recetas saludables y "Batch Cooking" para ahorrar tiempo.</p>
+                        <div>
+                            <p style="font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase;">Pain
+                                Point</p>
+                            <p>Fricción en filas y demora digital.</p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <footer
-            style="margin-top: 60px; padding: 40px 0; border-top: 1px solid var(--border); display: flex; justify-content: space-between;">
-            <p style="color: var(--text-muted); font-size: 0.85rem;">© 2026 Almacenes Éxito S.A.S. - Centro de
-                Inteligencia de Clientes</p>
-            <div>
-                <button class="btn-action"
-                    style="background: transparent; color: var(--accent); border: 1px solid var(--accent);">Descargar
-                    Reporte PDF</button>
-            </div>
-        </footer>
     </main>
 
     <script>
         lucide.createIcons();
 
-        // Section Switching Logic
-        function switchSection(sectionId) {
-            document.querySelectorAll('.section-view').forEach(s => s.classList.remove('active'));
-            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-
-            document.getElementById(sectionId).classList.add('active');
-            event.currentTarget.classList.add('active');
-        }
-
-        // Charts Configuration
-        const accentColor = '#FFE000';
-        const mutedColor = '#27272a';
         Chart.defaults.color = '#94a3b8';
-        Chart.defaults.font.family = 'Outfit';
+        Chart.defaults.font.family = "'Outfit', sans-serif";
 
-        // 1. Targeting Chart
-        new Chart(document.getElementById('targetingChart'), {
+        // 1. Age Chart
+        new Chart(document.getElementById('ageChart'), {
             type: 'bar',
             data: {
                 labels: ['S1 (18-24)', 'S2 (25-34)', 'S3 (35-44)', 'S4 (45-54)', 'S5 (55-65+)'],
                 datasets: [{
-                    label: 'Volumen (Millones)',
+                    label: 'Millones de personas',
                     data: [10.2, 13.1, 8.4, 5.4, 7.0],
-                    backgroundColor: [mutedColor, accentColor, mutedColor, mutedColor, '#52525b'],
-                    borderRadius: 10
+                    backgroundColor: context => context.index === 1 ? '#FFE000' : '#27272a',
+                    borderRadius: 12
                 }]
             },
             options: { plugins: { legend: { display: false } }, scales: { y: { grid: { color: '#27272a' } }, x: { grid: { display: false } } } }
         });
 
-        // 2. Motivation Chart
-        new Chart(document.getElementById('motivationChart'), {
-            type: 'polarArea',
+        // 2. Gender Chart
+        new Chart(document.getElementById('genderChart'), {
+            type: 'doughnut',
             data: {
-                labels: ['Ahorro', 'Lealtad', 'Salud', 'Status'],
+                labels: ['Femenino', 'Masculino'],
                 datasets: [{
-                    data: [85, 70, 60, 40],
-                    backgroundColor: [accentColor, '#f59e0b', '#10b981', '#6366f1'],
-                    borderWidth: 0
+                    data: [62, 38],
+                    backgroundColor: ['#FFE000', '#27272a'],
+                    borderWidth: 0,
+                    weight: 0.4
                 }]
             },
-            options: { plugins: { legend: { position: 'bottom' } }, scales: { r: { grid: { color: '#27272a' }, ticks: { display: false } } } }
+            options: { cutout: '75%', plugins: { legend: { position: 'bottom' } } }
         });
 
-        // 3. PIB vs Sales
-        new Chart(document.getElementById('pibSalesChart'), {
+        // 3. Social Listening History (Positive vs Negative)
+        new Chart(document.getElementById('listeningChart'), {
             type: 'line',
             data: {
-                labels: ['2021', '2022', '2023', '2024', '2025'],
+                labels: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
                 datasets: [
-                    { label: 'Ventas (Billones)', data: [12.6, 15.2, 15.8, 15.8, 16.6], borderColor: accentColor, tension: 0.4 },
-                    { label: 'PIB (%)', data: [10.8, 7.3, 0.6, 1.2, 2.5], borderColor: '#fff', borderDash: [5, 5], tension: 0.4 }
+                    {
+                        label: 'Sentimiento Positivo',
+                        data: [65, 68, 62, 70, 75, 72, 74, 85, 78, 80, 82, 90],
+                        borderColor: '#FFE000',
+                        backgroundColor: 'rgba(255, 224, 0, 0.1)',
+                        fill: true,
+                        tension: 0.4
+                    },
+                    {
+                        label: 'Sentimiento Negativo',
+                        data: [25, 22, 28, 20, 18, 22, 20, 15, 18, 17, 15, 10],
+                        borderColor: '#ef4444',
+                        tension: 0.4
+                    }
                 ]
             },
-            options: { scales: { y: { grid: { color: '#27272a' } } } }
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: { grid: { color: '#27272a' }, min: 0, max: 100 },
+                    x: { grid: { display: false } }
+                }
+            }
         });
 
-        // 4. Rates vs Ticket
-        new Chart(document.getElementById('ratesChart'), {
+        // 4. Seasonality Chart (Includes Agosto Aniversario & Diciembre)
+        new Chart(document.getElementById('seasonalityChart'), {
             type: 'bar',
             data: {
-                labels: ['T1', 'T2', 'T3', 'T4'],
+                labels: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago (Aniv.)', 'Sep', 'Oct', 'Nov', 'Dic'],
                 datasets: [{
-                    label: 'Tasa Interés (%)',
-                    data: [1.7, 12.0, 13.2, 9.2],
-                    backgroundColor: 'rgba(255, 224, 0, 0.4)'
+                    label: 'Índice de Venta',
+                    data: [85, 90, 95, 92, 115, 105, 100, 145, 110, 118, 125, 180],
+                    backgroundColor: context => {
+                        const val = context.raw;
+                        if (val > 150) return '#FFE000'; // Dic
+                        if (val > 130) return '#ffd700'; // Ago
+                        return '#27272a';
+                    },
+                    borderRadius: 8
                 }]
             },
-            options: { plugins: { legend: { display: false } } }
-        });
-
-        // 5. Seasonality
-        new Chart(document.getElementById('seasonChart'), {
-            type: 'bar',
-            data: {
-                labels: ['Abr', 'May', 'Jun', 'Ago', 'Dic'],
-                datasets: [{
-                    label: 'Índice Venta',
-                    data: [92, 115, 105, 135, 180],
-                    backgroundColor: context => context.raw > 130 ? accentColor : mutedColor,
-                    borderRadius: 5
-                }]
-            },
-            options: { plugins: { legend: { display: false } } }
-        });
-
-        // 6. Sentiment Hub
-        new Chart(document.getElementById('sentimentChart'), {
-            type: 'line',
-            data: {
-                labels: ['Sem 1', 'Sem 2', 'Sem 3', 'Sem 4', 'Sem 5', 'Sem 6'],
-                datasets: [{
-                    label: 'Score Sentimiento Positivo',
-                    data: [65, 68, 62, 75, 82, 80],
-                    borderColor: accentColor,
-                    backgroundColor: 'rgba(255, 224, 0, 0.1)',
-                    fill: true,
-                    tension: 0.4
-                }]
-            },
-            options: { scales: { y: { min: 50, max: 100 } } }
+            options: {
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        callbacks: {
+                            label: (ctx) => `Índice: ${ctx.raw} (100 = Promedio)`
+                        }
+                    }
+                },
+                scales: {
+                    y: { grid: { color: '#27272a' } },
+                    x: { grid: { display: false } }
+                }
+            }
         });
     </script>
 </body>
